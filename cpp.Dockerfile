@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 LABEL maintainer="Lei Mao <dukeleimao@gmail.com>"
 
@@ -28,9 +28,12 @@ RUN apt-get update &&\
 
 # Install CMake
 RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | apt-key add - &&\
-    apt-add-repository "deb https://apt.kitware.com/ubuntu/ bionic main" &&\
+    apt-add-repository "deb https://apt.kitware.com/ubuntu/ jammy main" &&\
     apt-get update &&\
     apt-get install -y cmake
+
+RUN apt-get update --fix-missing
+RUN apt-get install -y hashcat
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
